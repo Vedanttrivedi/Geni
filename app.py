@@ -57,7 +57,7 @@ def lambda_handler(event,context):
     s3_key = f"outputs/{current_time}.txt"
     s3_bucket = "geni-bedrock"
     save_data(s3_key=s3_key,s3_bucket=s3_bucket,payload=data)
-
+    return {"status_code ":200,"message":data}
 
     
 
