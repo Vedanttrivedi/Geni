@@ -28,8 +28,8 @@ def generate_details(client,topic):
         response_text = response["output"]["message"]["content"][0]["text"]
 
     except Exception as e:
-        print(f"Error: {e}")
-        return None
+       
+        return e
 
     return response_text
 
@@ -38,7 +38,7 @@ def save_data(s3_key,s3_bucket, payload):
 
     try:
         s3.put_object(Bucket = s3_bucket, Key = s3_key, Body = payload)
-        print("Saved Code")
+       
     except Exception as e:
         print(f"Something went wrong {e}")
     
@@ -52,7 +52,7 @@ def lambda_handler(event,context):
         print("Something went wrong ! Could not fetch data")
         return None
     
-    print(f"Data is :::{data} ")
+    
     current_time = datetime.now().strftime('%H%M%S')
     s3_key = f"outputs/{current_time}.txt"
     s3_bucket = "geni-bedrock"
